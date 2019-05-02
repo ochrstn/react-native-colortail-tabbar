@@ -1,0 +1,34 @@
+{
+  "name": "react-native-colortail-tabbar",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "https://github.com/ochrstn/react-native-colortail-tabbar",
+  "author": "Oliver Christen",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "lint": "tslint --project .",
+    "tsc": "tsc --noEmit",
+    "build": "rimraf lib/ && tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.15",
+    "@types/react-native": "^0.57.51",
+    "prettier": "^1.17.0",
+    "react": "^16.8.6",
+    "react-native": "^0.59.5",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5"
+  },
+  "peerDependencies": {
+    "prop-types": "*",
+    "react": "*",
+    "react-native": "*"
+  },
+  "dependencies": {
+    "react-spring": "^8.0.19"
+  }
+}

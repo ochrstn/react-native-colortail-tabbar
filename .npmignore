@@ -1,0 +1,6 @@
+example/
+node_modules/
+src/
+package/
+tsconfig.json
+tslint.json
