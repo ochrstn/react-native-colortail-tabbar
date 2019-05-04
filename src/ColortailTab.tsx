@@ -3,11 +3,13 @@ import { TouchableOpacity, View } from 'react-native'
 // @ts-ignore
 import { Spring, config } from 'react-spring/renderprops-native'
 import { ColortailTabData } from '.'
-import { TabRenderProps } from './ColortailTabBar'
 
-interface Props extends ColortailTabData {
+interface Props<DS extends object = {}> extends ColortailTabData<DS> {
   activeTab: number
   index: number
+  duration: number
+  from?: DS
+  to?: DS
   onTabPress: () => void
 }
 
@@ -18,7 +20,10 @@ interface State {
   isBetween: boolean
 }
 
-export class ColortailTab extends React.Component<Props, State> {
+export class ColortailTab<DS extends object = {}> extends React.Component<
+  Props<DS>,
+  State
+> {
   state = {
     toggle: false,
     distance: 0,
@@ -45,7 +50,7 @@ export class ColortailTab extends React.Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props<DS>) {
     if (this.props.activeTab !== prevProps.activeTab) {
       const distance = Math.abs(prevProps.activeTab - this.props.index)
       const forward = prevProps.activeTab < this.props.activeTab
@@ -65,7 +70,7 @@ export class ColortailTab extends React.Component<Props, State> {
               forward: this.state.forward,
               isBetween,
             })
-          }, distance * 150)
+          }, distance * this.props.duration)
         }
       })
     }
@@ -115,35 +120,49 @@ export class ColortailTab extends React.Component<Props, State> {
   }
 
   renderContent = () => {
-    return (
-      <Spring
-        config={config.wobbly}
-        from={
-          this.state.toggle || this.state.isBetween
-            ? { size: 15, opacity: 0.6 }
-            : { size: 20, opacity: 1 }
-        }
-        to={
-          this.state.toggle && !this.state.isBetween
-            ? { size: 20, opacity: 1 }
-            : { size: 15, opacity: 0.6 }
-        }
-      >
-        {(props: TabRenderProps) => this.props.renderTab(props)}
-      </Spring>
-    )
+    if (this.props.from !== undefined && this.props.to !== undefined) {
+      return (
+        <Spring
+          config={config.wobbly}
+          from={
+            this.state.toggle || this.state.isBetween
+              ? this.props.from
+              : this.props.to
+          }
+          to={
+            this.state.toggle && !this.state.isBetween
+              ? this.props.to
+              : this.props.from
+          }
+        >
+          {(props: DS) =>
+            (this.props.renderAnimatedTab &&
+              this.props.renderAnimatedTab(props)) ||
+            (this.props.renderTab && this.props.renderTab()) || null
+          }
+        </Spring>
+      )
+    } else {
+      if (this.props.renderTab) {
+        this.props.renderTab()
+      }
+    }
   }
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Spring
-          config={{ ...config.stiff, duration: 100 }}
+          config={{ ...config.stiff, duration: this.props.duration }}
           from={{
             width: this.state.toggle ? '0%' : '100%',
           }}
           to={{ width: this.state.toggle ? '100%' : '0%' }}
-          delay={(this.state.distance - 1) * 100}
+          delay={
+            this.state.distance > 1
+              ? (this.state.distance - 1) * this.props.duration
+              : 0
+          }
         >
           {({ width }: { width: number }) => (
             <View

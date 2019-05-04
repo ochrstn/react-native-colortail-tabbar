@@ -2,26 +2,26 @@ import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import { ColortailTab } from './ColortailTab'
 
-export interface TabRenderProps {
-  size: number
-  opacity: number
-}
 
-export interface ColortailTabData {
+export interface ColortailTabData<DS extends object = {}> {
   color: string
-  renderTab: (props: TabRenderProps) => JSX.Element
+  renderAnimatedTab?: (props: DS) => JSX.Element
+  renderTab?: () => JSX.Element
 }
 
-export interface ColortailTabbarProperties {
+export interface ColortailTabbarProperties<DS extends object = {}> {
   barStyle?: ViewStyle
-  tabs: ColortailTabData[]
+  tabs: Array<ColortailTabData<DS>>
   color: string
   activeTabIndex: number
+  duration?: number
+  from?: DS
+  to?: DS
   onTabPress: (index: number) => void
 }
 
-export default class ColorTailTabBar extends React.Component<
-  ColortailTabbarProperties
+export default class ColorTailTabBar<DS extends object = {}> extends React.Component<
+  ColortailTabbarProperties<DS>
 > {
   render() {
     const {
@@ -29,6 +29,9 @@ export default class ColorTailTabBar extends React.Component<
       barStyle,
       onTabPress,
       color = '#5c4f71',
+      duration = 100,
+      from,
+      to
     } = this.props
 
     return (
@@ -51,7 +54,11 @@ export default class ColorTailTabBar extends React.Component<
                 onTabPress(index)
               }}
               renderTab={tab.renderTab}
+              renderAnimatedTab={tab.renderAnimatedTab}
+              to={to}
+              from={from}
               activeTab={activeTabIndex}
+              duration={duration}
             />
           )
         })}
