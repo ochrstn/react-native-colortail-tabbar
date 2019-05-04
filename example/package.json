@@ -11,7 +11,9 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.5",
-    "react-native-colortail-tabbar": "file:.."
+    "react-native-colortail-tabbar": "^0.0.1",
+    "react-native-gesture-handler": "^1.2.1",
+    "react-navigation": "^3.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -19,6 +21,7 @@
     "@types/jest": "^24.0.12",
     "@types/react": "^16.8.15",
     "@types/react-native": "^0.57.51",
+    "@types/react-navigation": "^3.0.6",
     "@types/react-test-renderer": "^16.8.1",
     "babel-jest": "^24.7.1",
     "jest": "^24.7.1",
