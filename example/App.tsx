@@ -12,7 +12,7 @@ import {
   BottomTabBarProps,
 } from 'react-navigation'
 import ColorTailTabBar, {
-  ColortailTabData, interpolate
+  ColortailTabData,
 } from 'react-native-colortail-tabbar'
 
 import home from './icons/home.png'
@@ -22,22 +22,16 @@ import star from './icons/star.png'
 import apps from './icons/apps.png'
 
 interface AnimatedTabProps {
-  size: number;
-  opacity: number;
+  size: number
+  opacity: number
 }
 
 const ImageIcon = ({
   size,
   opacity,
-  icon
-}: AnimatedTabProps & {icon: ImageSourcePropType}) => {
-
-  return(
-    <Image
-      style={{ width: size, height: size, opacity }}
-      source={icon}
-    />
-  )
+  icon,
+}: AnimatedTabProps & { icon: ImageSourcePropType }) => {
+  return <Image style={{ width: size, height: size, opacity }} source={icon} />
 }
 
 const tabs: Array<ColortailTabData<AnimatedTabProps>> = [
@@ -60,7 +54,7 @@ const tabs: Array<ColortailTabData<AnimatedTabProps>> = [
   {
     color: '#73d6b5',
     renderAnimatedTab: props => <ImageIcon {...props} icon={apps} />,
-  }
+  },
 ]
 
 class Tab1 extends React.Component {
@@ -222,8 +216,8 @@ class MyTabBar extends Component<BottomTabBarProps, { activeTab: number }> {
         activeTabIndex={this.state.activeTab}
         onTabPress={this.onTabPress}
         duration={200}
-        from={{size: 22, opacity: 0.5}}
-        to={{size: 30, opacity: 1.0}}
+        from={{ size: 22, opacity: 0.5 }}
+        to={{ size: 30, opacity: 1.0 }}
       />
     )
   }

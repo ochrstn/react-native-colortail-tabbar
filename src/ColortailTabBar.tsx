@@ -2,7 +2,6 @@ import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import { ColortailTab } from './ColortailTab'
 
-
 export interface ColortailTabData<DS extends object = {}> {
   color: string
   renderAnimatedTab?: (props: DS) => JSX.Element
@@ -20,9 +19,9 @@ export interface ColortailTabbarProperties<DS extends object = {}> {
   onTabPress: (index: number) => void
 }
 
-export default class ColorTailTabBar<DS extends object = {}> extends React.Component<
-  ColortailTabbarProperties<DS>
-> {
+export default class ColorTailTabBar<
+  DS extends object = {}
+> extends React.Component<ColortailTabbarProperties<DS>> {
   render() {
     const {
       activeTabIndex,
@@ -31,7 +30,7 @@ export default class ColorTailTabBar<DS extends object = {}> extends React.Compo
       color = '#5c4f71',
       duration = 100,
       from,
-      to
+      to,
     } = this.props
 
     return (

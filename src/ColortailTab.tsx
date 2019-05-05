@@ -138,7 +138,8 @@ export class ColortailTab<DS extends object = {}> extends React.Component<
           {(props: DS) =>
             (this.props.renderAnimatedTab &&
               this.props.renderAnimatedTab(props)) ||
-            (this.props.renderTab && this.props.renderTab()) || null
+            (this.props.renderTab && this.props.renderTab()) ||
+            null
           }
         </Spring>
       )
