@@ -1,8 +1,10 @@
 # react-native-colortail-tabbar
 
-A colorful animated tabbar for React Native, which creates a colorful color trail when the tab changes.
+A colorful animated tabbar for React Native, which creates a color trail when the tab changes.
 
-![Example animation][docs/example.gif]
+<p align="center">
+  <img src="https://github.com/ochrstn/react-native-colortail-tabbar/blob/master/docs/example.gif" />
+</p>
 
 ## Installation
 
@@ -74,6 +76,14 @@ render() {
 ## Full example
 
 See [`example/App.tsx`](example/App.tsx) for a working demo with [`react-navigation`](https://reactnavigation.org).
+
+## :baby: Stability / Maturity :baby:
+
+This is in the early development phase. As such:
+
+* The code may be refactored drastically
+* Interfaces may change in a backwards-incompatible ways
+* Documentation and testing may be lacking
 
 ## Built With
 
